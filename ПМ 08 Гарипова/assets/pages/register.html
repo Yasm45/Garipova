@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <a href="login.html">Вход</a>
+                <a href="register.html" class="nav-active">Регистрация</a>
+            </div>
+        </nav>
+
+        <div class="card fade-in">
+            <h2>Регистрация</h2>
+            <p style="color: var(--gray); margin-bottom: 16px;">Создайте аккаунт для записи на обучение</p>
+
+            <form id="registerForm" novalidate>
+                <!-- Логин -->
+                <div class="form-group">
+                    <label for="regLogin">Логин *</label>
+                    <input type="text" id="regLogin" placeholder="Латинские буквы и цифры, минимум 6 символов">
+                    <div class="error-message" id="loginError">Логин должен содержать латинские буквы и цифры, минимум 6 символов</div>
+                </div>
+
+                <!-- Пароль -->
+                <div class="form-group">
+                    <label for="regPassword">Пароль *</label>
+                    <input type="password" id="regPassword" placeholder="Минимум 8 символов">
+                    <div class="error-message" id="passwordError">Пароль должен содержать минимум 8 символов</div>
+                </div>
+
+                <!-- ФИО -->
+                <div class="form-group">
+                    <label for="regFullname">ФИО *</label>
+                    <input type="text" id="regFullname" placeholder="Иванов Иван Иванович">
+                    <div class="error-message" id="fullnameError">Введите полное ФИО</div>
+                </div>
+
+                <!-- Дата рождения -->
+                <div class="form-group">
+                    <label for="regBirthdate">Дата рождения *</label>
+                    <input type="date" id="regBirthdate">
+                    <div class="error-message" id="birthdateError">Выберите дату рождения</div>
+                </div>
+
+                <!-- Телефон -->
+                <div class="form-group">
+                    <label for="regPhone">Контактный телефон *</label>
+                    <input type="tel" id="regPhone" placeholder="+7 (999) 123-45-67">
+                    <div class="error-message" id="phoneError">Введите номер телефона</div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="regEmail">E-mail *</label>
+                    <input type="email" id="regEmail" placeholder="example@mail.ru">
+                    <div class="error-message" id="emailError">Введите корректный email</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 16px; font-size: 14px;">
+                Уже зарегистрированы? <a href="login.html" style="color: var(--primary-blue); font-weight: 700;">Войти</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

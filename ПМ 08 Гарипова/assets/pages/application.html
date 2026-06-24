@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заявки | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <span id="userDisplayNav" class="user-name"></span>
+                <a href="profile.html">Кабинет</a>
+                <a href="application.html" class="nav-active">Новая заявка</a>
+                <a href="#" onclick="logout()" class="logout-link">Выйти</a>
+            </div>
+        </nav>
+
+        <div class="card fade-in">
+            <h2>Оформление заявки на обучение</h2>
+            <p style="color: var(--gray); margin-bottom: 16px;">Заполните форму для записи на курсы</p>
+
+            <form id="applicationForm">
+                <!-- Вид транспорта (выпадающий список) -->
+                <div class="form-group">
+                    <label for="transportType">Вид транспорта *</label>
+                    <select id="transportType">
+                        <option value="">Выберите вид транспорта</option>
+                        <option value="Автобус">Автобус</option>
+                        <option value="Электробус">Электробус</option>
+                        <option value="Трамвай">Трамвай</option>
+                    </select>
+                    <div class="error-message" id="transportError">Выберите вид транспорта</div>
+                </div>
+
+                <!-- Дата начала (формат ДД.ММ.ГГГГ) -->
+                <div class="form-group">
+                    <label for="startDate">Дата начала обучения *</label>
+                    <input type="text" id="startDate" placeholder="ДД.ММ.ГГГГ (например: 15.08.2026)">
+                    <div class="error-message" id="dateError">Введите дату в формате ДД.ММ.ГГГГ</div>
+                    <small class="helper-text">Формат: ДД.ММ.ГГГГ</small>
+                </div>
+
+                <!-- Способ оплаты (выпадающий список) -->
+                <div class="form-group">
+                    <label for="paymentMethod">Способ оплаты *</label>
+                    <select id="paymentMethod">
+                        <option value="">Выберите способ оплаты</option>
+                        <option value="Предоплата по QR-коду">Предоплата по QR-коду</option>
+                        <option value="Оплата картой МИР">Оплата картой МИР</option>
+                        <option value="Постоплата в офисе">Постоплата в офисе</option>
+                    </select>
+                    <div class="error-message" id="paymentError">Выберите способ оплаты</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Отправить заявку</button>
+            </form>
+
+            <div id="applicationMessage" style="margin-top: 12px;"></div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

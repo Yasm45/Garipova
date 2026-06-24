@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <a href="login.html" class="nav-active">Вход</a>
+                <a href="register.html">Регистрация</a>
+            </div>
+        </nav>
+
+        <div class="card fade-in">
+            <h2>Вход в систему</h2>
+            <p style="color: var(--gray); margin-bottom: 16px;">Введите логин и пароль для входа</p>
+
+            <!-- Блок для предупреждений -->
+            <div id="loginAlert" class="alert alert-danger" style="display: none;"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Логин</label>
+                    <input type="text" id="loginUsername" placeholder="Введите логин">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" placeholder="Введите пароль">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Войти</button>
+            </form>
+
+            <p style="text-align: center; margin-top: 16px; font-size: 14px;">
+                Еще не зарегистрированы? <a href="register.html" style="color: var(--primary-blue); font-weight: 700;">Регистрация</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

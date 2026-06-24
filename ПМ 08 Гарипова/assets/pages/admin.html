@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <span style="color: var(--gray); font-size: 14px; margin-right: 12px;">Администратор</span>
+                <a href="admin.html" class="nav-active">Управление</a>
+                <a href="#" onclick="logout()" class="logout-link">Выйти</a>
+            </div>
+        </nav>
+
+        <div class="card fade-in">
+            <h2>Панель управления</h2>
+            <p style="color: var(--gray); margin-bottom: 16px;">Управление заявками на обучение</p>
+
+            <!-- Фильтры -->
+            <div class="admin-filters">
+                <input type="text" id="adminSearch" placeholder="Поиск по ФИО..." oninput="filterApplications()">
+                <select id="adminStatusFilter" onchange="filterApplications()">
+                    <option value="">Все статусы</option>
+                    <option value="Новая">Новая</option>
+                    <option value="Идет обучение">Идет обучение</option>
+                    <option value="Обучение завершено">Обучение завершено</option>
+                </select>
+                <span style="font-size: 14px; color: var(--gray);" id="adminCount"></span>
+            </div>
+
+            <!-- Таблица заявок -->
+            <div style="overflow-x: auto;">
+                <table class="admin-table" id="adminTable">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)" style="cursor: pointer;">ID</th>
+                            <th onclick="sortTable(1)" style="cursor: pointer;">ФИО</th>
+                            <th onclick="sortTable(2)" style="cursor: pointer;">Транспорт</th>
+                            <th onclick="sortTable(3)" style="cursor: pointer;">Дата</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody">
+                        <!-- Данные загружаются скриптом -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Постраничная навигация -->
+            <div class="pagination" id="adminPagination"></div>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

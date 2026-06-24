@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <span id="userDisplay" class="user-name"></span>
+                <a href="profile.html" class="nav-active">Кабинет</a>
+                <a href="application.html">Новая заявка</a>
+                <a href="#" onclick="logout()" class="logout-link">Выйти</a>
+            </div>
+        </nav>
+
+        <!-- Слайдер в личном кабинете -->
+        <div class="slider-container">
+            <div class="slider-track" id="profileSlider">
+                <img src="../../assets/img/anonsPitchbussamarin(9).webp" alt="Обучение автобус">
+                <img src="../../assets/img/b3ac9a437887fb6a1d5c9.jpg" alt="Обучение электробус">
+                <img src="../../assets/img/b7d2d780c0cca44401c954ed5.jpg" alt="Обучение трамвай">
+                <img src="../../assets/img/e295464686cc17d074cb2f14.jpg" alt="Пассажирские перевозки">
+            </div>
+            <button class="slider-btn prev" onclick="prevSlide()">‹</button>
+            <button class="slider-btn next" onclick="nextSlide()">›</button>
+            <div class="slider-dots" id="profileSliderDots"></div>
+        </div>
+
+        <!-- Мои заявки -->
+        <div class="card fade-in">
+            <h3>Мои заявки</h3>
+            <div id="applicationsList">
+                <p style="color: var(--gray); text-align: center; padding: 20px 0;">У вас пока нет заявок</p>
+            </div>
+        </div>
+
+        <!-- Оставить отзыв -->
+        <div class="card fade-in">
+            <h3>Оставить отзыв</h3>
+            <p style="font-size: 14px; color: var(--gray); margin-bottom: 12px;">
+                Вы можете оставить отзыв только по завершенным заявкам
+            </p>
+            
+            <div class="form-group">
+                <label>Выберите заявку для отзыва</label>
+                <select id="reviewApplicationSelect">
+                    <option value="">Нет завершенных заявок</option>
+                </select>
+            </div>
+
+            <div class="star-rating" id="starRating">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+
+            <div class="form-group">
+                <label>Текст отзыва</label>
+                <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлениями об обучении..."></textarea>
+            </div>
+
+            <button onclick="submitReview()" class="btn btn-primary">Отправить отзыв</button>
+            <div id="reviewMessage" style="margin-top: 8px;"></div>
+        </div>
+
+        <a href="application.html" class="btn btn-primary" style="margin-top: 8px;">Новая заявка</a>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <!-- Подключение Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ======================================== -->
+        <!-- НАВИГАЦИЯ -->
+        <!-- ======================================== -->
+        <nav class="nav-links">
+            <a href="index.html" class="brand">
+                Пассажирам.<span>РФ</span>
+            </a>
+            <div class="nav-menu">
+                <a href="assets/pages/login.html">
+                    <i class="fas fa-sign-in-alt"></i> Вход
+                </a>
+                <a href="assets/pages/register.html" class="nav-register">
+                    <i class="fas fa-user-plus"></i> Регистрация
+                </a>
+            </div>
+        </nav>
+
+        <!-- ======================================== -->
+        <!-- ГЕРО-БЛОК (шапка с призывом) -->
+        <!-- ======================================== -->
+        <div class="hero-section">
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap"></i> Официальные курсы
+            </div>
+            <h1 class="hero-title">
+                Стань водителем<br>
+                <span>пассажирского транспорта</span>
+            </h1>
+            <p class="hero-description">
+                Профессиональное обучение вождению автобуса, электробуса и трамвая. 
+                Лицензированные инструкторы, современный автопарк, гибкий график.
+            </p>
+            <div class="hero-buttons">
+                <a href="assets/pages/register.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-arrow-right"></i> Начать обучение
+                </a>
+                <a href="assets/pages/login.html" class="btn btn-outline btn-large">
+                    <i class="fas fa-user"></i> Уже есть аккаунт
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">
+                        <i class="fas fa-user-graduate"></i> Выпускников
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">
+                        <i class="fas fa-check-circle"></i> Успешных сдач
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">
+                        <i class="fas fa-calendar-alt"></i> Лет опыта
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- СЛАЙДЕР -->
+        <!-- ======================================== -->
+        <div class="slider-container">
+            <div class="slider-track" id="mainSlider">
+                <img src="assets/img/1_large.png" alt="Обучение вождению автобуса">
+                <img src="assets/img/2-9.jpg" alt="Обучение вождению электробуса">
+                <img src="assets/img/5ea09b2e31416396857a41b46232b058.png" alt="Обучение вождению трамвая">
+                <img src="assets/img/374e0e8da34a4f029351687cb429f1c1.jpg" alt="Пассажирские перевозки">
+            </div>
+            <button class="slider-btn prev" onclick="prevSlide()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next" onclick="nextSlide()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ВИДЫ ТРАНСПОРТА -->
+        <!-- ======================================== -->
+        <div class="section-title">
+            <h2>Виды транспорта для обучения</h2>
+            <p>Выберите направление, которое вам интересно</p>
+        </div>
+
+        <div class="transport-grid">
+            <div class="transport-card">
+                <div class="transport-icon">
+                    <i class="fas fa-bus"></i>
+                </div>
+                <h3>Автобус</h3>
+                <p>Обучение вождению городских и междугородних автобусов категории D</p>
+                <span class="transport-tag">
+                    <i class="fas fa-tag"></i> Категория D
+                </span>
+            </div>
+            <div class="transport-card">
+                <div class="transport-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Электробус</h3>
+                <p>Современный экологичный транспорт. Обучение на электробусах нового поколения</p>
+                <span class="transport-tag">
+                    <i class="fas fa-tag"></i> Категория D
+                </span>
+            </div>
+            <div class="transport-card">
+                <div class="transport-icon">
+                    <i class="fas fa-train-tram"></i>
+                </div>
+                <h3>Трамвай</h3>
+                <p>Классический городской транспорт. Обучение управлению трамваем</p>
+                <span class="transport-tag">
+                    <i class="fas fa-tag"></i> Категория T
+                </span>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ПРЕИМУЩЕСТВА -->
+        <!-- ======================================== -->
+        <div class="section-title">
+            <h2>Почему выбирают нас</h2>
+            <p>Мы создали идеальные условия для обучения</p>
+        </div>
+
+        <div class="advantages-grid">
+            <div class="advantage-item">
+                <div class="advantage-number">01</div>
+                <h4>
+                    <i class="fas fa-chalkboard-teacher" style="color: var(--primary-blue);"></i>
+                    Опытные инструкторы
+                </h4>
+                <p>Преподаватели с многолетним стажем работы в пассажирских перевозках</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">02</div>
+                <h4>
+                    <i class="fas fa-car" style="color: var(--primary-blue);"></i>
+                    Современный автопарк
+                </h4>
+                <p>Новые автомобили, электробусы и трамваи с комфортными условиями</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">03</div>
+                <h4>
+                    <i class="fas fa-clock" style="color: var(--primary-blue);"></i>
+                    Гибкий график
+                </h4>
+                <p>Обучение в удобное время, возможность совмещать с работой</p>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-number">04</div>
+                <h4>
+                    <i class="fas fa-briefcase" style="color: var(--primary-blue);"></i>
+                    Помощь в трудоустройстве
+                </h4>
+                <p>Сотрудничество с транспортными компаниями города</p>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ПРОЦЕСС ОБУЧЕНИЯ -->
+        <!-- ======================================== -->
+        <div class="section-title">
+            <h2>Как проходит обучение</h2>
+            <p>Всего 4 шага к профессии водителя</p>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">
+                    <i class="fas fa-pen"></i>
+                </div>
+                <div class="step-content">
+                    <h4>Регистрация</h4>
+                    <p>Создайте аккаунт и заполните анкету</p>
+                </div>
+            </div>
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="step">
+                <div class="step-number">
+                    <i class="fas fa-list-check"></i>
+                </div>
+                <div class="step-content">
+                    <h4>Выбор направления</h4>
+                    <p>Определитесь с видом транспорта</p>
+                </div>
+            </div>
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="step">
+                <div class="step-number">
+                    <i class="fas fa-road"></i>
+                </div>
+                <div class="step-content">
+                    <h4>Обучение</h4>
+                    <p>Теория и практика с инструктором</p>
+                </div>
+            </div>
+            <div class="step-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            <div class="step">
+                <div class="step-number">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="step-content">
+                    <h4>Выпуск</h4>
+                    <p>Получение сертификата и трудоустройство</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ОТЗЫВЫ -->
+        <!-- ======================================== -->
+        <div class="section-title">
+            <h2>Отзывы выпускников</h2>
+            <p>Реальные истории наших студентов</p>
+        </div>
+
+        <div class="reviews">
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Отличные инструкторы! Сдал экзамен с первого раза. Рекомендую всем, кто хочет стать водителем автобуса."</p>
+                <div class="review-author">
+                    <strong>Иван Петров</strong>
+                    <span>Выпускник 2025</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"Обучение на электробусе — это будущее! Современный подход, новые технологии. Очень довольна."</p>
+                <div class="review-author">
+                    <strong>Екатерина Смирнова</strong>
+                    <span>Выпускник 2025</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">"Прошел обучение на трамвай. Спасибо за терпение и профессионализм. Теперь работаю в депо."</p>
+                <div class="review-author">
+                    <strong>Алексей Козлов</strong>
+                    <span>Выпускник 2024</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ПРИЗЫВ К ДЕЙСТВИЮ (CTA) -->
+        <!-- ======================================== -->
+        <div class="cta-section">
+            <div class="cta-content">
+                <h2>Готовы начать обучение?</h2>
+                <p>Запишитесь на курсы прямо сейчас и получите скидку на первый месяц обучения</p>
+                <a href="assets/pages/register.html" class="btn btn-primary btn-large">
+                    <i class="fas fa-arrow-right"></i> Записаться на курсы
+                </a>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ (из улучшений ТЗ) -->
+        <!-- ======================================== -->
+        <div class="contact-info">
+            <div class="contact-row">
+                <i class="fas fa-map-marker-alt" style="color: var(--primary-blue); width: 20px;"></i>
+                <strong>Адрес:</strong>
+                <span>г. Москва, ул. Большая Ордынка, д. 15</span>
+            </div>
+            <div class="contact-row">
+                <i class="fas fa-phone" style="color: var(--primary-blue); width: 20px;"></i>
+                <strong>Телефон:</strong>
+                <span>+7 (495) 123-45-67</span>
+            </div>
+            <div class="contact-row">
+                <i class="fas fa-credit-card" style="color: var(--primary-blue); width: 20px;"></i>
+                <strong>Способы оплаты:</strong>
+                <div class="payment-options">
+                    <span class="payment-badge">
+                        <i class="fas fa-qrcode"></i> Предоплата по QR-коду
+                    </span>
+                    <span class="payment-badge">
+                        <i class="fas fa-credit-card"></i> Оплата картой МИР
+                    </span>
+                    <span class="payment-badge">
+                        <i class="fas fa-building"></i> Постоплата в офисе
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ФУТЕР -->
+        <!-- ======================================== -->
+        <footer class="footer">
+            <p>
+                <i class="fas fa-bus" style="color: var(--primary-blue);"></i>
+                Пассажирам.РФ — Обучение водителей пассажирского транспорта
+            </p>
+            <p class="footer-copy">© 2026 Все права защищены</p>
+        </footer>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <!-- Подключение Font Awesome для звезд -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- ======================================== -->
+        <!-- НАВИГАЦИЯ -->
+        <!-- ======================================== -->
+        <nav class="nav-links">
+            <a href="../../index.html" class="brand">
+                Пассажирам.<span>РФ</span>
+            </a>
+            <div class="nav-menu">
+                <span id="userDisplay" class="user-name"></span>
+                <a href="profile.html" class="nav-active">Кабинет</a>
+                <a href="application.html">Новая заявка</a>
+                <a href="#" onclick="logout()" class="logout-link">Выйти</a>
+            </div>
+        </nav>
+
+        <!-- ======================================== -->
+        <!-- ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ -->
+        <!-- ======================================== -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <!-- Аватарка -->
+                <div class="avatar-container">
+                    <img id="avatarImage" src="../../assets/img/default-avatar.png" alt="Аватар" class="avatar-image">
+                    <button class="avatar-change-btn" onclick="document.getElementById('avatarInput').click()">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                    <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="changeAvatar(event)">
+                </div>
+                
+                <!-- Имя пользователя -->
+                <div class="profile-info">
+                    <h2 id="profileName">Иван Иванов</h2>
+                    <p class="profile-login" id="profileLogin">@ivanov</p>
+                    <span class="profile-status status-active">Активен</span>
+                </div>
+            </div>
+
+            <!-- Детальная информация -->
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span class="detail-label">ФИО</span>
+                    <span class="detail-value" id="profileFullname">Иванов Иван Иванович</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Дата рождения</span>
+                    <span class="detail-value" id="profileBirthdate">01.01.1990</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Телефон</span>
+                    <span class="detail-value" id="profilePhone">+7 (999) 123-45-67</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Email</span>
+                    <span class="detail-value" id="profileEmail">ivanov@mail.ru</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Дата регистрации</span>
+                    <span class="detail-value" id="profileRegistered">15.06.2025</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Последний вход</span>
+                    <span class="detail-value" id="profileLastLogin">Сегодня, 14:30</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- МОИ ЗАЯВКИ -->
+        <!-- ======================================== -->
+        <div class="card">
+            <h3>Мои заявки</h3>
+            <div id="applicationsList">
+                <p style="color: var(--gray); text-align: center; padding: 20px 0;">У вас пока нет заявок</p>
+            </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- ОСТАВИТЬ ОТЗЫВ -->
+        <!-- ======================================== -->
+        <div class="card">
+            <h3>Оставить отзыв</h3>
+            <p style="font-size: 14px; color: var(--gray); margin-bottom: 12px;">
+                Вы можете оставить отзыв только по завершенным заявкам
+            </p>
+            
+            <div class="form-group">
+                <label>Выберите заявку для отзыва</label>
+                <select id="reviewApplicationSelect">
+                    <option value="">Нет завершенных заявок</option>
+                </select>
+            </div>
+
+            <!-- Звезды через Font Awesome -->
+            <div class="star-rating" id="starRating">
+                <i class="fas fa-star star" data-value="1"></i>
+                <i class="fas fa-star star" data-value="2"></i>
+                <i class="fas fa-star star" data-value="3"></i>
+                <i class="fas fa-star star" data-value="4"></i>
+                <i class="fas fa-star star" data-value="5"></i>
+            </div>
+
+            <div class="form-group">
+                <label>Текст отзыва</label>
+                <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлениями об обучении..."></textarea>
+            </div>
+
+            <button onclick="submitReview()" class="btn btn-primary">Отправить отзыв</button>
+            <div id="reviewMessage" style="margin-top: 8px;"></div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- КНОПКА НОВОЙ ЗАЯВКИ -->
+        <!-- ======================================== -->
+        <a href="application.html" class="btn btn-primary" style="margin-top: 8px;">Новая заявка</a>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

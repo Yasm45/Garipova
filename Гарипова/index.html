@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пассажирам.РФ. Обучение перевозкам: автобус, электробус, трамвай</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <nav class="nav-links">
+            <a href="index.html" class="brand">Пассажирам.<span>РФ</span></a>
+            <div class="nav-menu">
+                <a href="assets/pages/login.html">Вход</a>
+                <a href="assets/pages/register.html" class="nav-register">Регистрация</a>
+            </div>
+        </nav>
+
+        <!-- Слайдер -->
+        <div class="slider-container">
+            <div class="slider-track" id="mainSlider">
+                <img src="assets/img/1_large.png" alt="Обучение вождению автобуса">
+                <img src="assets/img/2-9.jpg" alt="Обучение вождению электробуса">
+                <img src="assets/img/5ea09b2e31416396857a41b46232b058.png" alt="Обучение вождению трамвая">
+                <img src="assets/img/374e0e8da34a4f029351687cb429f1c1.jpg" alt="Пассажирские перевозки">
+            </div>
+            <button class="slider-btn prev" onclick="prevSlide()">‹</button>
+            <button class="slider-btn next" onclick="nextSlide()">›</button>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+
+        <!-- Главный контент -->
+        <div class="card fade-in">
+            <h1>Обучение водителей пассажирских перевозок</h1>
+            <p>Запишитесь на курсы вождения автобуса, электробуса или трамвая. Профессиональные инструкторы, современный автопарк.</p>
+            <br>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <a href="assets/pages/register.html" class="btn btn-primary" style="flex: 1;">Зарегистрироваться</a>
+                <a href="assets/pages/login.html" class="btn btn-outline" style="flex: 1;">Войти</a>
+            </div>
+        </div>
+
+        <!-- Контактная информация -->
+        <div class="contact-info">
+            <strong>Адрес:</strong> г. Москва, ул. Большая Ордынка, д. 15<br>
+            <strong>Телефон:</strong> +7 (495) 123-45-67<br>
+            <strong>Способы оплаты:</strong>
+            <div class="payment-options">
+                <span class="payment-badge">Предоплата по QR-коду</span>
+                <span class="payment-badge">Оплата картой МИР</span>
+                <span class="payment-badge">Постоплата в офисе</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

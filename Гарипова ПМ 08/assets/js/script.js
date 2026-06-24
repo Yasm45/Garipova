@@ -911,3 +911,453 @@ function selectForReview(appId) {
     }
 }
 
+/**
+ * ========================================
+ * ЗВЕЗДНЫЙ РЕЙТИНГ И ОТЗЫВЫ
+ * ========================================
+ */
+
+function initStarRating() {
+    var stars = document.querySelectorAll('.star-rating .star');
+    for (var i = 0; i < stars.length; i++) {
+        (function(star) {
+            star.addEventListener('click', function() {
+                selectedRating = parseInt(this.dataset.value);
+                updateStars(selectedRating);
+            });
+            star.addEventListener('mouseenter', function() {
+                var value = parseInt(this.dataset.value);
+                highlightStars(value);
+            });
+            star.addEventListener('mouseleave', function() {
+                highlightStars(selectedRating);
+            });
+        })(stars[i]);
+    }
+}
+
+function updateStars(rating) {
+    var stars = document.querySelectorAll('.star-rating .star');
+    for (var i = 0; i < stars.length; i++) {
+        if (i < rating) {
+            stars[i].classList.add('active');
+        } else {
+            stars[i].classList.remove('active');
+        }
+    }
+}
+
+function highlightStars(rating) {
+    var stars = document.querySelectorAll('.star-rating .star');
+    for (var i = 0; i < stars.length; i++) {
+        if (i < rating) {
+            stars[i].classList.add('active');
+        } else {
+            stars[i].classList.remove('active');
+        }
+    }
+}
+
+function submitReview() {
+    if (!currentUser) {
+        showToast('Пожалуйста, войдите в систему', 'danger');
+        return;
+    }
+    
+    var select = document.getElementById('reviewApplicationSelect');
+    var text = document.getElementById('reviewText');
+    var message = document.getElementById('reviewMessage');
+    
+    if (!select.value) {
+        message.innerHTML = '<div class="alert alert-danger">Выберите заявку для отзыва</div>';
+        showToast('Выберите заявку', 'danger');
+        return;
+    }
+    
+    if (selectedRating === 0) {
+        message.innerHTML = '<div class="alert alert-danger">Поставьте оценку (1-5 звезд)</div>';
+        showToast('Поставьте оценку', 'warning');
+        return;
+    }
+    
+    if (!text.value.trim() || text.value.trim().length < 5) {
+        message.innerHTML = '<div class="alert alert-danger">Напишите отзыв (минимум 5 символов)</div>';
+        showToast('Напишите более развернутый отзыв', 'warning');
+        return;
+    }
+    
+    var reviews = DB.getReviews();
+    var newReview = {
+        id: Date.now(),
+        userId: currentUser.id,
+        applicationId: parseInt(select.value),
+        rating: selectedRating,
+        text: text.value.trim(),
+        createdAt: new Date().toISOString()
+    };
+    reviews.push(newReview);
+    DB.setReviews(reviews);
+    
+    var apps = DB.getApplications();
+    var appIndex = -1;
+    for (var i = 0; i < apps.length; i++) {
+        if (apps[i].id === parseInt(select.value)) {
+            appIndex = i;
+            break;
+        }
+    }
+    if (appIndex !== -1) {
+        apps[appIndex].reviewGiven = true;
+        DB.setApplications(apps);
+    }
+    
+    var starsText = '';
+    for (var i = 0; i < selectedRating; i++) {
+        starsText += '★';
+    }
+    message.innerHTML = '<div class="alert alert-success">Спасибо за отзыв! ' + starsText + '</div>';
+    showToast('Отзыв сохранен!', 'success');
+    
+    text.value = '';
+    selectedRating = 0;
+    updateStars(0);
+    select.value = '';
+    
+    setTimeout(function() {
+        loadProfileData();
+    }, 1000);
+}
+
+/**
+ * ========================================
+ * АДМИН ПАНЕЛЬ
+ * ========================================
+ */
+
+function loadAdminData() {
+    if (!currentUser || currentUser.role !== 'admin') {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    var apps = DB.getApplications();
+    adminFilteredData = [];
+    for (var i = 0; i < apps.length; i++) {
+        adminFilteredData.push(apps[i]);
+    }
+    adminCurrentPage = 1;
+    renderAdminTable();
+    updateAdminStats();
+}
+
+function updateAdminStats() {
+    var apps = DB.getApplications();
+    var total = apps.length;
+    var newCount = 0;
+    var learningCount = 0;
+    var completedCount = 0;
+    
+    for (var i = 0; i < apps.length; i++) {
+        if (apps[i].status === 'Новая') newCount++;
+        else if (apps[i].status === 'Идет обучение') learningCount++;
+        else if (apps[i].status === 'Обучение завершено') completedCount++;
+    }
+    
+    var statTotal = document.getElementById('statTotal');
+    var statNew = document.getElementById('statNew');
+    var statLearning = document.getElementById('statLearning');
+    var statCompleted = document.getElementById('statCompleted');
+    var countEl = document.getElementById('adminCount');
+    
+    if (statTotal) statTotal.textContent = total;
+    if (statNew) statNew.textContent = newCount;
+    if (statLearning) statLearning.textContent = learningCount;
+    if (statCompleted) statCompleted.textContent = completedCount;
+    if (countEl) countEl.textContent = 'Всего: ' + adminFilteredData.length + ' заявок';
+}
+
+function refreshData() {
+    showToast('Обновление данных...', 'info');
+    loadAdminData();
+    setTimeout(function() {
+        showToast('Данные обновлены', 'success');
+    }, 500);
+}
+
+function filterByStatus(status) {
+    var filterSelect = document.getElementById('adminStatusFilter');
+    if (filterSelect) {
+        filterSelect.value = status;
+        filterApplications();
+    }
+}
+
+function resetFilters() {
+    var searchInput = document.getElementById('adminSearch');
+    var filterSelect = document.getElementById('adminStatusFilter');
+    var sortSelect = document.getElementById('adminSortFilter');
+    
+    if (searchInput) searchInput.value = '';
+    if (filterSelect) filterSelect.value = '';
+    if (sortSelect) sortSelect.value = '0';
+    
+    adminSortColumn = -1;
+    adminSortAsc = true;
+    
+    filterApplications();
+    showToast('Фильтры сброшены', 'info');
+}
+
+function filterApplications() {
+    var search = document.getElementById('adminSearch').value.toLowerCase().trim();
+    var statusFilter = document.getElementById('adminStatusFilter').value;
+    
+    var apps = DB.getApplications();
+    adminFilteredData = [];
+    for (var i = 0; i < apps.length; i++) {
+        var matchSearch = apps[i].userFullname.toLowerCase().indexOf(search) !== -1;
+        var matchStatus = statusFilter === '' || apps[i].status === statusFilter;
+        if (matchSearch && matchStatus) {
+            adminFilteredData.push(apps[i]);
+        }
+    }
+    
+    adminCurrentPage = 1;
+    renderAdminTable();
+    updateAdminStats();
+}
+
+function renderAdminTable() {
+    var tbody = document.getElementById('adminTableBody');
+    var pagination = document.getElementById('adminPagination');
+    var pageInfo = document.getElementById('pageInfo');
+    
+    if (!tbody) return;
+    
+    var totalItems = adminFilteredData.length;
+    var totalPages = Math.ceil(totalItems / adminItemsPerPage);
+    if (totalPages === 0) totalPages = 1;
+    
+    if (totalItems === 0) {
+        tbody.innerHTML = 
+            '<tr>' +
+                '<td colspan="6" style="text-align: center; padding: 30px; color: var(--gray);">' +
+                    'Заявок не найдено' +
+                '</td>' +
+            '</tr>';
+        pagination.innerHTML = '';
+        if (pageInfo) pageInfo.textContent = 'Показано 0 из 0';
+        return;
+    }
+    
+    var start = (adminCurrentPage - 1) * adminItemsPerPage;
+    var end = Math.min(start + adminItemsPerPage, totalItems);
+    var pageItems = adminFilteredData.slice(start, end);
+    
+    var html = '';
+    for (var i = 0; i < pageItems.length; i++) {
+        var app = pageItems[i];
+        var statusClass = '';
+        if (app.status === 'Новая') {
+            statusClass = 'status-new';
+        } else if (app.status === 'Идет обучение') {
+            statusClass = 'status-learning';
+        } else {
+            statusClass = 'status-completed';
+        }
+        
+        var selectedNew = app.status === 'Новая' ? 'selected' : '';
+        var selectedLearning = app.status === 'Идет обучение' ? 'selected' : '';
+        var selectedCompleted = app.status === 'Обучение завершено' ? 'selected' : '';
+        
+        html += 
+            '<tr class="fade-in">' +
+                '<td><strong>#' + app.id + '</strong></td>' +
+                '<td>' + app.userFullname + '</td>' +
+                '<td>' + app.transport + '</td>' +
+                '<td>' + app.startDate + '</td>' +
+                '<td><span class="status-badge ' + statusClass + '">' + app.status + '</span></td>' +
+                '<td>' +
+                    '<select onchange="changeStatus(' + app.id + ', this.value)">' +
+                        '<option value="Новая" ' + selectedNew + '>Новая</option>' +
+                        '<option value="Идет обучение" ' + selectedLearning + '>Идет обучение</option>' +
+                        '<option value="Обучение завершено" ' + selectedCompleted + '>Обучение завершено</option>' +
+                    '</select>' +
+                '</td>' +
+            '</tr>';
+    }
+    
+    tbody.innerHTML = html;
+    
+    /* Пагинация */
+    var pagHtml = '';
+    pagHtml += '<button onclick="changePage(\'prev\')" ' + (adminCurrentPage === 1 ? 'disabled' : '') + '&lt;</button>';
+    
+    for (var i = 1; i <= totalPages; i++) {
+        if (i === adminCurrentPage) {
+            pagHtml += '<button class="active">' + i + '</button>';
+        } else if (i === 1 || i === totalPages || Math.abs(i - adminCurrentPage) <= 1) {
+            pagHtml += '<button onclick="changePage(' + i + ')">' + i + '</button>';
+        } else if (i === adminCurrentPage - 2 || i === adminCurrentPage + 2) {
+            pagHtml += '<button disabled>...</button>';
+        }
+    }
+    
+    pagHtml += '<button onclick="changePage(\'next\')" ' + (adminCurrentPage === totalPages ? 'disabled' : '') + '>&gt;</button>';
+    pagination.innerHTML = pagHtml;
+    
+    /* Информация о странице */
+    if (pageInfo) {
+        pageInfo.textContent = 'Показано ' + (start + 1) + '-' + end + ' из ' + totalItems;
+    }
+}
+
+function changePage(page) {
+    var totalPages = Math.ceil(adminFilteredData.length / adminItemsPerPage);
+    if (totalPages === 0) totalPages = 1;
+    
+    if (page === 'prev' && adminCurrentPage > 1) {
+        adminCurrentPage--;
+    } else if (page === 'next' && adminCurrentPage < totalPages) {
+        adminCurrentPage++;
+    } else if (typeof page === 'number' && page >= 1 && page <= totalPages) {
+        adminCurrentPage = page;
+    }
+    
+    renderAdminTable();
+}
+
+function changeStatus(appId, newStatus) {
+    var apps = DB.getApplications();
+    var appIndex = -1;
+    for (var i = 0; i < apps.length; i++) {
+        if (apps[i].id === appId) {
+            appIndex = i;
+            break;
+        }
+    }
+    
+    if (appIndex === -1) {
+        showToast('Заявка не найдена', 'danger');
+        return;
+    }
+    
+    var oldStatus = apps[appIndex].status;
+    apps[appIndex].status = newStatus;
+    DB.setApplications(apps);
+    
+    showToast('Статус заявки #' + appId + ' изменен: "' + oldStatus + '" → "' + newStatus + '"', 'success');
+    
+    if (newStatus === 'Обучение завершено') {
+        setTimeout(function() {
+            showToast('Обучение завершено! Пользователь может оставить отзыв.', 'info');
+        }, 600);
+    }
+    
+    adminFilteredData = DB.getApplications();
+    filterApplications();
+    updateAdminStats();
+}
+
+function sortTable(column) {
+    var sortMap = ['id', 'userFullname', 'transport', 'startDate'];
+    var key = sortMap[column];
+    
+    if (adminSortColumn === column) {
+        adminSortAsc = !adminSortAsc;
+    } else {
+        adminSortColumn = column;
+        adminSortAsc = true;
+    }
+    
+    adminFilteredData.sort(function(a, b) {
+        var valA = a[key] || '';
+        var valB = b[key] || '';
+        
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+        
+        if (valA < valB) return adminSortAsc ? -1 : 1;
+        if (valA > valB) return adminSortAsc ? 1 : -1;
+        return 0;
+    });
+    
+    renderAdminTable();
+    showToast('Сортировка по ' + key + (adminSortAsc ? ' (по возрастанию)' : ' (по убыванию)'), 'info');
+}
+
+/**
+ * ========================================
+ * ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+ * ========================================
+ */
+
+/* ВСПЛЫВАЮЩИЕ УВЕДОМЛЕНИЯ - ТОЛЬКО 5 ЦВЕТОВ */
+function showToast(message, type) {
+    if (!type) type = 'info';
+    
+    var oldToast = document.querySelector('.toast');
+    if (oldToast) oldToast.remove();
+    
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    
+    /* ТОЛЬКО 5 РАЗРЕШЕННЫХ ЦВЕТОВ */
+    toast.style.background = 'var(--dark-blue)';
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.4s ease';
+        setTimeout(function() {
+            toast.remove();
+        }, 400);
+    }, 3000);
+}
+
+function logout() {
+    DB.clearCurrentUser();
+    currentUser = null;
+    showToast('Вы вышли из системы', 'info');
+    setTimeout(function() {
+        window.location.href = '../../index.html';
+    }, 500);
+    return false;
+}
+
+function updateUserDisplay() {
+    currentUser = DB.getCurrentUser();
+    
+    var display = document.getElementById('userDisplay');
+    if (display && currentUser) {
+        display.textContent = currentUser.fullname;
+    }
+    
+    var displayNav = document.getElementById('userDisplayNav');
+    if (displayNav && currentUser) {
+        displayNav.textContent = currentUser.fullname;
+    }
+}
+
+function checkAuth() {
+    var currentPage = window.location.pathname.split('/').pop();
+    var protectedPages = ['profile.html', 'application.html', 'admin.html'];
+    
+    var isProtected = false;
+    for (var i = 0; i < protectedPages.length; i++) {
+        if (currentPage === protectedPages[i]) {
+            isProtected = true;
+            break;
+        }
+    }
+    
+    if (isProtected && !currentUser) {
+        window.location.href = 'login.html';
+    }
+    
+    if (currentPage === 'admin.html' && (!currentUser || currentUser.role !== 'admin')) {
+        window.location.href = 'login.html';
+    }
+}

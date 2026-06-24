@@ -744,3 +744,229 @@ a {
     font-size: 16px;
 }
 
+.contact-row strong {
+    color: var(--dark-blue);
+    font-weight: 700;
+}
+
+.contact-row span {
+    color: var(--gray);
+}
+
+.payment-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.payment-options .payment-badge {
+    background: var(--bg-white);
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    border: 1px solid var(--primary-blue);
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+/* ========================================
+   ФУТЕР
+   ======================================== */
+.footer {
+    text-align: center;
+    padding: 20px 0 8px 0;
+    border-top: 1px solid var(--gray);
+}
+
+.footer p {
+    font-size: 15px;
+    color: var(--gray);
+}
+
+.footer-copy {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 4px;
+}
+
+/* ========================================
+   СТАТУСЫ ЗАЯВОК
+   ======================================== */
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-new {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+}
+
+.status-learning {
+    background: var(--bg-light);
+    color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
+}
+
+.status-completed {
+    background: var(--bg-light);
+    color: var(--dark-blue);
+    border: 1px solid var(--dark-blue);
+}
+
+/* ========================================
+   ТОСТ (ВСПЛЫВАЮЩЕЕ УВЕДОМЛЕНИЕ)
+   ======================================== */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--dark-blue);
+    color: var(--bg-white);
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    z-index: 1000;
+    animation: fadeIn 0.4s ease-out;
+    max-width: 90%;
+    text-align: center;
+}
+
+/* ========================================
+   ПУСТЫЕ СОСТОЯНИЯ
+   ======================================== */
+.empty-state {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--gray);
+}
+
+.empty-state .empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    color: var(--gray);
+}
+
+.empty-state h4 {
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+}
+
+/* ========================================
+   ПРОФИЛЬ ПОЛЬЗОВАТЕЛЯ
+   ======================================== */
+.profile-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid var(--gray);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.avatar-container {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+}
+
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-blue);
+}
+
+.avatar-change-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary-blue);
+    color: var(--bg-white);
+    border: 2px solid var(--bg-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.avatar-change-btn:hover {
+    background: var(--dark-blue);
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h2 {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.profile-login {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 4px;
+}
+
+.profile-status {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.profile-status.status-active {
+    background: var(--bg-light);
+    color: var(--primary-blue);
+    border: 1px solid var(--primary-blue);
+}
+
+.profile-details {
+    border-top: 1px solid var(--gray);
+    padding-top: 12px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid var(--bg-light);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.detail-value {
+    color: #333;
+    text-align: right;
+}
+
